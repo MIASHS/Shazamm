@@ -5,13 +5,13 @@ package com.company;
  */
 public class Joueur {
     private String nomJoueur;
-    private String couleurJoueur;
     private int numJoueur;
+    private int pointMana=28;
 
-    public Joueur(String nomJoueur, String couleurJoueur, int numJoueur) {
+    public Joueur(String nomJoueur, int numJoueur, int pointMana) {
         this.nomJoueur = nomJoueur;
-        this.couleurJoueur = couleurJoueur;
         this.numJoueur = numJoueur;
+        this.pointMana= pointMana;
     }
 
     public String getNomJoueur() {
@@ -22,14 +22,6 @@ public class Joueur {
         this.nomJoueur = nomJoueur;
     }
 
-    public String getCouleurJoueur() {
-        return couleurJoueur;
-    }
-
-    public void setCouleurJoueur(String couleurJoueur) {
-        this.couleurJoueur = couleurJoueur;
-    }
-
     public int getNumJoueur() {
         return numJoueur;
     }
@@ -37,4 +29,8 @@ public class Joueur {
     public void setNumJoueur(int numJoueur) {
         this.numJoueur = numJoueur;
     }
+
+    public int getPointMana(){return pointMana;}
+
+    public void setPointMana(int pointMana){this.pointMana=pointMana;}
 }

@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by Gaby on 24/02/2017.
@@ -9,6 +10,8 @@ public class Carte {
 
     private int numCarte;
     private String nomCarte;
+    private HashSet<Carte> carteJ1;
+    private HashSet<Carte> cartesJ2;
 
     public Carte(int numCarte, String nomCarte) {
         this.numCarte = numCarte;
@@ -30,4 +33,6 @@ public class Carte {
     public void setNomCarte(String nomCarte) {
         this.nomCarte = nomCarte;
     }
+
+
 }
