@@ -16,6 +16,8 @@ public class Jeu {
     private HashSet<Carte> carteJ1;
     private HashSet<Carte> cartesJ2;
     int tableauEntier[] = new int[21];
+    Boolean vert= false;
+    Boolean rouge= false;
 
 
 
@@ -43,11 +45,17 @@ public class Jeu {
 
     public void couleurJoueur(Joueur joueur){
         Random ra = new Random();
+
         int fonction = ra.nextInt(2);
             if (fonction==1){
-                System.out.println("Sorcier "+joueur.getNumJoueur()+ " est le sorcier rouge");
-            }else if ((fonction==0)){
-                System.out.println("Sorcier "+joueur.getNumJoueur()+ "est le sorcier vert");
+                rouge=true;
+                vert=false;
+                System.out.println("Sorcier "+joueur.getNumJoueur() + " est le sorcier rouge");
+
+            }else{
+                System.out.println("Sorcier "+joueur.getNumJoueur() + "est le sorcier vert");
+                vert=true;
+                rouge=false;
             }
     }
 
