@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -14,11 +15,15 @@ public class Jeu {
     private boolean finTour=false;
     private HashSet<Carte> carteJ1;
     private HashSet<Carte> cartesJ2;
+    int tableauEntier[] = new int[21];
+
+
 
     public void debutJeu(){
+
         this.listJoueur= new ArrayList<Joueur>();
         int numJoueur=1;
-        int pointMana=28;
+        int pointMana=50;
         System.out.println("Bienvenue dans le jeu Shazamm !");
 
         for (int i =0; i<nbJoueus; i++){
@@ -30,9 +35,20 @@ public class Jeu {
             listJoueur.add(j);
             numJoueur+=1;
 
+            couleurJoueur(j);
+
         }
-        System.out.println(listJoueur+" liste des joueurs");
+
     }
 
+    public void couleurJoueur(Joueur joueur){
+        Random ra = new Random();
+        int fonction = ra.nextInt(2);
+            if (fonction==1){
+                System.out.println("Sorcier "+joueur.getNumJoueur()+ " est le sorcier rouge");
+            }else if ((fonction==0)){
+                System.out.println("Sorcier "+joueur.getNumJoueur()+ "est le sorcier vert");
+            }
+    }
 
 }

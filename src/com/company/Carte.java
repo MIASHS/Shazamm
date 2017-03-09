@@ -18,6 +18,37 @@ public class Carte {
         this.nomCarte = nomCarte;
     }
 
+    public String toString(){
+        if (numCarte==1){
+            return "carte Mutisme";
+        }else if (numCarte==2){
+            return "carte Clone";
+        }else if (numCarte==3){
+            return "carte Larcin";
+        }else if (numCarte==4){
+            return "carte Fin de manche";
+        }else if (numCarte==5){
+            return "carte Milieu";
+        }else if (numCarte==6){
+            return "carte Recyclage";
+        }else if (numCarte==7){
+            return "carte Boost attaque";
+        }else if (numCarte==8){
+            return "carte Double dose";
+        }else if (numCarte==9){
+            return "carte Qui perd gagne";
+        }else if (numCarte==10){
+            return "carte Brasier";
+        }else if (numCarte==11){
+            return "carte Boost réserve";
+        }else if (numCarte==12){
+            return "carte Aspiration";
+        }
+        return "Paquet vide";
+    }
+
+
+
     public int getNumCarte() {
         return numCarte;
     }
