@@ -10,8 +10,7 @@ public class Carte {
 
     private int numCarte;
     private String nomCarte;
-    private HashSet<Carte> carteJ1;
-    private HashSet<Carte> cartesJ2;
+
 
     public Carte(int numCarte, String nomCarte) {
         this.numCarte = numCarte;

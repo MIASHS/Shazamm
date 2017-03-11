@@ -8,6 +8,7 @@ public class Joueur {
     private int numJoueur;
     private int pointMana=28;
 
+
     public Joueur(String nomJoueur, int numJoueur, int pointMana) {
         this.nomJoueur = nomJoueur;
         this.numJoueur = numJoueur;

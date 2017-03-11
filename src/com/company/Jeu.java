@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by Gaby on 24/02/2017.
@@ -13,11 +10,14 @@ public class Jeu {
     private ArrayList<Joueur> listJoueur;
     private int nbJoueus = 2;
     private boolean finTour=false;
-    private HashSet<Carte> carteJ1;
-    private HashSet<Carte> cartesJ2;
+    private Carte[] cartesTotal = new Carte[30];
+    private HashSet<Carte>cartesTotal2 = new HashSet<>();
+    private Carte[] cartesJ1 = new Carte[14];
+    private Carte[] cartesJ2 = new Carte[14];
     int tableauEntier[] = new int[21];
     Boolean vert= false;
     Boolean rouge= false;
+    private int nombreCarte;
 
 
 
@@ -36,12 +36,38 @@ public class Jeu {
             Joueur j=new Joueur(nomJoueur,numJoueur,pointMana);
             listJoueur.add(j);
             numJoueur+=1;
-
             couleurJoueur(j);
 
         }
+        init();
+        nbCarte();
 
     }
+
+    public void init() {
+        int indexSuprise = 0;
+        for (int i=0; i<2;i++){
+            for (int j =1; j<14;j++){
+                Carte c =new Carte(j," ");
+                this.cartesTotal2.add(c);
+            }
+        }
+    }
+
+    public void attaquer(){
+
+    }
+
+    public int nbCarte (){
+        int i = 0;
+        for (Carte carte : this.cartesTotal2){
+
+            System.out.println(carte);
+            i++;
+        }
+        return i;
+    }
+
 
     public void couleurJoueur(Joueur joueur){
         Random ra = new Random();
