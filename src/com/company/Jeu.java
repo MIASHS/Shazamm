@@ -10,7 +10,7 @@ public class Jeu {
     private ArrayList<Joueur> listJoueur;
     private int nbJoueus = 2;
     private boolean finTour=false;
-    private Carte[] cartesTotal = new Carte[30];
+    private HashSet<Carte>cartesTotal1 = new HashSet<>();
     private HashSet<Carte>cartesTotal2 = new HashSet<>();
     private Carte[] cartesJ1 = new Carte[14];
     private Carte[] cartesJ2 = new Carte[14];
@@ -45,14 +45,12 @@ public class Jeu {
     }
 
     public void init() {
-        int indexSuprise = 0;
-        for (int i=0; i<2;i++){
             for (int j =1; j<14;j++){
                 Carte c =new Carte(j," ");
                 this.cartesTotal2.add(c);
+                this.cartesTotal1.add(c);
             }
         }
-    }
 
     public void attaquer(){
 
@@ -62,7 +60,11 @@ public class Jeu {
         int i = 0;
         for (Carte carte : this.cartesTotal2){
 
-            System.out.println(carte);
+            System.out.println(" CARTES TOTAL2 "+carte);
+            i++;
+        }for (Carte carte : this.cartesTotal1){
+
+            System.out.println("CARTE TOTAL 1 "+cartesTotal1);
             i++;
         }
         return i;

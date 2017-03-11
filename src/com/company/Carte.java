@@ -42,8 +42,9 @@ public class Carte {
             return "carte Boost réserve";
         }else if (numCarte==12){
             return "carte Aspiration";
+        }else{
+            return "Paquet vide";
         }
-        return "Paquet vide";
     }
 
 
