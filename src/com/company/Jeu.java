@@ -78,11 +78,14 @@ public class Jeu {
     }
 
     public void echangerDeuxCartes(){
-        int z = (int) (Math.random() * 14.0);
-        int y = (int)(Math.random() * 14.0);
+        int z = (int) (Math.random() * 15.0);
+        int y = (int)(Math.random() * 15.0);
         Carte surprise = cartesJ1[y];
         cartesJ1[y] = cartesJ1 [z];
         cartesJ1[z]= surprise;
+        Carte surprise2 =cartesJ2[y];
+        cartesJ2[y] = cartesJ1 [z];
+        cartesJ2[z]= surprise2;
     }
 
     public void melanger(int nbFista) {
