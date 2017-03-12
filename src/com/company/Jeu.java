@@ -37,6 +37,7 @@ public class Jeu {
 
         }
         init();
+        melanger(50);
         superPaquet();
 
     }
@@ -76,6 +77,19 @@ public class Jeu {
 
     }
 
+    public void echangerDeuxCartes(){
+        int z = (int) (Math.random() * 14.0);
+        int y = (int)(Math.random() * 14.0);
+        Carte surprise = cartesJ1[y];
+        cartesJ1[y] = cartesJ1 [z];
+        cartesJ1[z]= surprise;
+    }
+
+    public void melanger(int nbFista) {
+        for (int i = 0; i < nbFista; i++) {
+            this.echangerDeuxCartes();
+        }
+    }
 
     public void couleurJoueur(Joueur joueur){
         Random ra = new Random();
