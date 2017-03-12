@@ -45,7 +45,7 @@ public class Jeu {
     }
 
     public void init() {
-            for (int j =1; j<14;j++){
+            for (int j =0; j<14;j++){
                 Carte c =new Carte(j," ");
                 this.cartesTotal2.add(c);
                 this.cartesTotal1.add(c);
@@ -67,6 +67,7 @@ public class Jeu {
             System.out.println("CARTE TOTAL 1 "+cartesTotal1);
             i++;
         }
+        System.out.println(i);
         return i;
     }
 
