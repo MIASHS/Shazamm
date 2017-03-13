@@ -10,6 +10,7 @@ public class Jeu {
     private ArrayList<Joueur> listJoueur;
     private int nbJoueus = 2;
     private boolean finTour=false;
+    private boolean finManche=false;
     private Carte[] cartesJ1 = new Carte[15];
     private Carte[] cartesJ2 = new Carte[15];
     int tableauEntier[] = new int[21];
@@ -21,24 +22,27 @@ public class Jeu {
     public void debutJeu(){
 
         this.listJoueur= new ArrayList<Joueur>();
-        int numJoueur=1;
+        int numJoueur=0;
         int pointMana=50;
+        String nomJoueur;
         System.out.println("Bienvenue dans le jeu Shazamm !");
 
-        for (int i =0; i<nbJoueus; i++){
-            String nomJoueur;
+        for (int i =0; i<2; i++){
+
             Scanner sc= new Scanner(System.in);
             System.out.println("Veuillez renseigner le nom du joueur ");
             nomJoueur = sc.nextLine();
             Joueur j=new Joueur(nomJoueur,numJoueur,pointMana);
             listJoueur.add(j);
-            numJoueur+=1;
-            couleurJoueur(j);
+
 
         }
         init();
-        melanger(50);
         superPaquet();
+        melanger(50);
+        attaquer();
+
+
 
     }
 
@@ -51,29 +55,46 @@ public class Jeu {
 //            }
 //        }
 
+    public void choixPuissance(Joueur joueur){
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Saisissez un entier : ");
+        int puissance = sc.nextInt();
+        joueur.setPointMana(joueur.getPointMana()-puissance);
+        
+        System.out.println(" Puissance du coup "+joueur.getPuissanceCoup());
+    }
+
+
+
     public void attaquer(){
+
+        this.choixPuissance(listJoueur.get(0));
+        this.choixPuissance(listJoueur.get(1));
 
     }
 
-    public void init() {
 
-            for (int i = 0; i < 15; i++) {
-                cartesJ1[i] = new Carte(i, "");
-                i++;
-            }for (int i = 0; i < 15; i++) {
-            cartesJ2[i] = new Carte(i, " ");
+
+    public void init() {
+        for (int i = 0; i < 15; i++) {
+            cartesJ1[i] = new Carte(i, "\n");
             i++;
         }
+        for (int i = 0; i < 15; i++) {
+            cartesJ2[i] = new Carte(i, "\n");
+            i++;
         }
+    }
 
     public void superPaquet(){
 
-            for (int i = 1; i < cartesJ1.length; i++) {
-                System.out.print(" Connard de joueur 1 [" + i + "]=" + cartesJ1[i] + " ");
-            }
-            for (int i = 1; i < cartesJ2.length; i++) {
-                System.out.print(" Connard de joueur 2 [" + i + "]=" + cartesJ2[i] + " ");
-            }
+        for (int i = 1; i < cartesJ1.length; i++) {
+            System.out.print(" Connard de joueur 1 [" + i + "]=" + cartesJ1[i] + " ");
+        }
+        for (int i = 1; i < cartesJ2.length; i++) {
+            System.out.print(" Connard de joueur 2 [" + i + "]=" + cartesJ2[i] + " ");
+        }
 
     }
 
@@ -98,16 +119,16 @@ public class Jeu {
         Random ra = new Random();
 
         int fonction = ra.nextInt(2);
-            if (fonction==1){
-                rouge=true;
-                vert=false;
-                System.out.println("Sorcier "+joueur.getNumJoueur() + " est le sorcier rouge");
+        if (fonction==1){
+            rouge=true;
+            vert=false;
+            System.out.println("Sorcier "+joueur.getNumJoueur() + " est le sorcier rouge");
 
-            }else{
-                System.out.println("Sorcier "+joueur.getNumJoueur() + "est le sorcier vert");
-                vert=true;
-                rouge=false;
-            }
+        }else{
+            System.out.println("Sorcier "+joueur.getNumJoueur() + "est le sorcier vert");
+            vert=true;
+            rouge=false;
+        }
     }
 
 
