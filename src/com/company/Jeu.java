@@ -131,6 +131,13 @@ public class Jeu {
         }
     }
 
+    public void finTour(){
+        finTour=true;
+    }
+
+    public void setFinManche(){
+        finManche=true;
+    }
 
 
 }
