@@ -61,8 +61,15 @@ public class Jeu {
         System.out.println("Saisissez un entier : ");
         int puissance = sc.nextInt();
         joueur.setPointMana(joueur.getPointMana()-puissance);
-        
-        System.out.println(" Puissance du coup "+joueur.getPuissanceCoup());
+        if (puissance >joueur.getPointMana()){
+            System.out.println("Pas possible FDP recommence");
+            choixPuissance(joueur);
+        }else{
+            System.out.println(" Puissance du coup "+ puissance);
+            System.out.println("il reste "+ joueur.getPointMana()+" points de Mana");
+        }
+
+
     }
 
 
