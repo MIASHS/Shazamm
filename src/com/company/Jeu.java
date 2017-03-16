@@ -8,7 +8,7 @@ import java.util.*;
 public class Jeu {
 
     private ArrayList<Joueur> listJoueur;
-    private int nbJoueus = 2;
+    private int nbJoueus;
     private boolean finTour=false;
     private boolean finManche=false;
     private Carte[] cartesJ1 = new Carte[15];
@@ -27,22 +27,21 @@ public class Jeu {
         String nomJoueur;
         System.out.println("Bienvenue dans le jeu Shazamm !");
 
-        for (int i =0; i<2; i++){
+        for (int i =1; i<3; i++){
 
             Scanner sc= new Scanner(System.in);
             System.out.println("Veuillez renseigner le nom du joueur ");
             nomJoueur = sc.nextLine();
             Joueur j=new Joueur(nomJoueur,numJoueur,pointMana);
             listJoueur.add(j);
-            couleurJoueur(j);
+            numJoueur+=1;
         }
-
+        couleurJoueur();
         init();
         superPaquet();
         melanger(50);
-        //choixPuissance();
         attaquer();
-        
+
 
     }
 
@@ -77,9 +76,14 @@ public class Jeu {
     public void attaquer(){
             this.choixPuissance();
             if (listJoueur.get(0).getPuissanceCoup()<listJoueur.get(1).getPuissanceCoup()){
-                System.out.println("Pas assez fort batard ");
+                System.out.println("Pas assez fort batard "+listJoueur.get(1).getNumJoueur() +" gagne");
+
             }else if (listJoueur.get(0).getPuissanceCoup()> listJoueur.get(1).getPuissanceCoup()){
-            System.out.println("Trop fort batard ");
+
+            System.out.println("Trop fort batard le joueur "+listJoueur.get(0).getNumJoueur()+" gagne");
+            }else if (listJoueur.get(0).getPuissanceCoup()== listJoueur.get(1).getPuissanceCoup()){
+
+                System.out.println(" Même patate pour les deux joueurs");
             }else {
                 System.out.println("OUALALALA");
             }
@@ -127,19 +131,18 @@ public class Jeu {
         }
     }
 
-    public void couleurJoueur(Joueur joueur){
+    public void couleurJoueur(){
         Random ra = new Random();
 
         int fonction = ra.nextInt(2);
-        if (fonction==1){
-            rouge=true;
-            vert=false;
-            System.out.println("Sorcier "+joueur.getNumJoueur() + " est le sorcier rouge");
+        for (int i=0; i<listJoueur.size();i++) {
+            if (fonction == 1) {
+                System.out.println("Sorcier " + listJoueur.get(i).getNumJoueur() + " est le sorcier rouge");
 
-        }else{
-            System.out.println("Sorcier "+joueur.getNumJoueur() + "est le sorcier vert");
-            vert=true;
-            rouge=false;
+            } else {
+                System.out.println("Sorcier " + listJoueur.get(i).getNumJoueur() + "est le sorcier vert");
+
+            }
         }
     }
 
