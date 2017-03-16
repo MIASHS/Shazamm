@@ -34,15 +34,15 @@ public class Jeu {
             nomJoueur = sc.nextLine();
             Joueur j=new Joueur(nomJoueur,numJoueur,pointMana);
             listJoueur.add(j);
-
-
+            couleurJoueur(j);
         }
+
         init();
         superPaquet();
         melanger(50);
+        //choixPuissance();
         attaquer();
-
-
+        
 
     }
 
@@ -55,31 +55,36 @@ public class Jeu {
 //            }
 //        }
 
-    public void choixPuissance(Joueur joueur){
+    public void choixPuissance(){
+        for (int i=0; i<listJoueur.size();i++) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Saisissez un entier : ");
+            int puissance = sc.nextInt();
+            listJoueur.get(i).setPuissanceCoup(puissance);
+            listJoueur.get(i).setPointMana(listJoueur.get(i).getPointMana() - puissance);
+            if (puissance > listJoueur.get(i).getPointMana()) {
+                System.out.println("Pas possible FDP recommence");
+            } else {
+                System.out.println(" Puissance du coup " + puissance);
+                System.out.println("il reste " + listJoueur.get(i).getPointMana() + " points de Mana");
+            }
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Saisissez un entier : ");
-        int puissance = sc.nextInt();
-        joueur.setPointMana(joueur.getPointMana()-puissance);
-        if (puissance >joueur.getPointMana()){
-            System.out.println("Pas possible FDP recommence");
-            choixPuissance(joueur);
-        }else{
-            System.out.println(" Puissance du coup "+ puissance);
-            System.out.println("il reste "+ joueur.getPointMana()+" points de Mana");
         }
-
-
     }
 
 
 
     public void attaquer(){
-
-        this.choixPuissance(listJoueur.get(0));
-        this.choixPuissance(listJoueur.get(1));
-
+            this.choixPuissance();
+            if (listJoueur.get(0).getPuissanceCoup()<listJoueur.get(1).getPuissanceCoup()){
+                System.out.println("Pas assez fort batard ");
+            }else if (listJoueur.get(0).getPuissanceCoup()> listJoueur.get(1).getPuissanceCoup()){
+            System.out.println("Trop fort batard ");
+            }else {
+                System.out.println("OUALALALA");
+            }
     }
+
 
 
 
@@ -139,10 +144,12 @@ public class Jeu {
     }
 
     public void finTour(){
+
         finTour=true;
     }
 
     public void setFinManche(){
+
         finManche=true;
     }
 
