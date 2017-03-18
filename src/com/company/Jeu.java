@@ -92,6 +92,8 @@ public class Jeu {
     }
 
     public void plateauJeu(){
+        int tableauEntier[] = new int[21];
+        tableauEntier[]
     }
 
 
