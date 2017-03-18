@@ -43,6 +43,7 @@ public class Jeu {
         superPaquet();
         melanger(50);
         attaquer();
+        plateauJeu();
 
 
     }
@@ -92,8 +93,14 @@ public class Jeu {
     }
 
     public void plateauJeu(){
-        int tableauEntier[] = new int[21];
-        tableauEntier[]
+        if (nbManches==0) {
+            int tableauEntier[] = new int[21];
+            tableauEntier[19 / 2 + 1] = 11;
+        }
+
+//        for (int i = 1; i < tableauEntier.length; i++) {
+//            System.out.print(" Connard de joueur 1 [" + i + "]=" + tableauEntier[i] + " ");
+//        }
     }
 
 
