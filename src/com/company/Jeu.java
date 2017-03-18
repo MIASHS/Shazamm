@@ -9,11 +9,13 @@ public class Jeu {
 
     private ArrayList<Joueur> listJoueur;
     private int nbJoueus;
+    private int nbManches;
+    private int nbTours;
     private boolean finTour=false;
     private boolean finManche=false;
     private Carte[] cartesJ1 = new Carte[15];
     private Carte[] cartesJ2 = new Carte[15];
-    int tableauEntier[] = new int[21];
+
     Boolean vert= false;
     Boolean rouge= false;
 
@@ -89,7 +91,8 @@ public class Jeu {
             }
     }
 
-
+    public void plateauJeu(){
+    }
 
 
     public void init() {
