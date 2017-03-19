@@ -77,9 +77,15 @@ public class Jeu {
 
 
     public void attaquer(){
+            int tailleTab=19;
+            int placeMur=tailleTab/2+1;
+            int tableauEntier[] = new int[tailleTab];
+            String[] noms = new String[tailleTab];
+            noms [19/2+1]= "M";
             this.choixPuissance();
             if (listJoueur.get(0).getPuissanceCoup()<listJoueur.get(1).getPuissanceCoup()){
                 System.out.println("Pas assez fort batard "+listJoueur.get(1).getNumJoueur() +" gagne");
+                tailleTab=tailleTab-2;
 
             }else if (listJoueur.get(0).getPuissanceCoup()> listJoueur.get(1).getPuissanceCoup()){
 
