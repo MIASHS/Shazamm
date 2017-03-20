@@ -38,11 +38,12 @@ public class Jeu {
             listJoueur.add(j);
             numJoueur+=1;
         }
+        Plateau p= new Plateau();
         couleurJoueur();
         init();
         superPaquet();
         melanger(50);
-        attaquer();
+        attaquer(p);
         plateauJeu();
 
 
@@ -76,17 +77,12 @@ public class Jeu {
 
 
 
-    public void attaquer(){
-            int tailleTab=19;
-            int placeMur=tailleTab/2+1;
-            int tableauEntier[] = new int[tailleTab];
-            String[] noms = new String[tailleTab];
-            noms [19/2+1]= "M";
+    public void attaquer(Plateau plateau){
+
             this.choixPuissance();
             if (listJoueur.get(0).getPuissanceCoup()<listJoueur.get(1).getPuissanceCoup()){
                 System.out.println("Pas assez fort batard "+listJoueur.get(1).getNumJoueur() +" gagne");
-                tailleTab=tailleTab-2;
-
+                plateau.setPlaceMur(plateau.getTailleTab()-3);
             }else if (listJoueur.get(0).getPuissanceCoup()> listJoueur.get(1).getPuissanceCoup()){
 
             System.out.println("Trop fort batard le joueur "+listJoueur.get(0).getNumJoueur()+" gagne");
