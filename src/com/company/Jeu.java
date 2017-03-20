@@ -1,5 +1,6 @@
 package com.company;
 
+import java.awt.*;
 import java.util.*;
 
 /**
@@ -78,11 +79,16 @@ public class Jeu {
 
 
     public void attaquer(Plateau plateau){
-
+            plateau.getPlateauBase();
+            plateau.setPlateauBase(plateau.getPlateauBase()[plateau.]);// ATTENTION
+            System.out.println("Taille tab avant   "+plateau.getTailleTab());
             this.choixPuissance();
             if (listJoueur.get(0).getPuissanceCoup()<listJoueur.get(1).getPuissanceCoup()){
                 System.out.println("Pas assez fort batard "+listJoueur.get(1).getNumJoueur() +" gagne");
-                plateau.setPlaceMur(plateau.getTailleTab()-3);
+                plateau.setPlaceMur(plateau.getPlaceMur()-1);
+
+                System.out.println("Taille tab après "+plateau.getTailleTab());
+                System.out.println("Place du mur "+plateau.getPlaceMur()+"    Place J1  "+plateau.getPlaceJ1()+"      Place J2  "+plateau.getPlaceJ2());
             }else if (listJoueur.get(0).getPuissanceCoup()> listJoueur.get(1).getPuissanceCoup()){
 
             System.out.println("Trop fort batard le joueur "+listJoueur.get(0).getNumJoueur()+" gagne");

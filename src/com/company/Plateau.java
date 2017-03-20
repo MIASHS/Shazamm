@@ -6,20 +6,12 @@ package com.company;
 public class Plateau {
     int tailleTab=21;
     String[] plateauBase = new String[tailleTab]; // 2 sentinelles
-    double placeMur = tailleTab/2-(0.5);
+    double placeMur = (tailleTab/2);
     double placeJ1 = placeMur-3;
-    double placeJ2=placeMur+3;
+    double placeJ2= placeMur+3;
 
     public Plateau() {
 
-    }
-
-    public int getTailleTab() {
-        return tailleTab;
-    }
-
-    public void setTailleTab(int tailleTab) {
-        this.tailleTab = tailleTab;
     }
 
     public String[] getPlateauBase() {
@@ -28,6 +20,14 @@ public class Plateau {
 
     public void setPlateauBase(String[] plateauBase) {
         this.plateauBase = plateauBase;
+    }
+
+    public int getTailleTab() {
+        return tailleTab;
+    }
+
+    public void setTailleTab(int tailleTab) {
+        this.tailleTab = tailleTab;
     }
 
     public double getPlaceMur() {
