@@ -1,24 +1,26 @@
 package com.company;
 
+import java.util.Hashtable;
+
 /**
  * Created by Gaby on 20/03/2017.
  */
 public class Plateau {
-    int tailleTab=21;
-    String[] plateauBase = new String[tailleTab]; // 2 sentinelles
-    double placeMur = (tailleTab/2);
-    double placeJ1 = placeMur-3;
-    double placeJ2= placeMur+3;
+    private int tailleTab=21;
+    Hashtable plateauBase = new Hashtable();
+    private int placeMur = (tailleTab/2);
+    private int placeJ1 = placeMur-3;
+    private int placeJ2= placeMur+3;
 
     public Plateau() {
 
     }
 
-    public String[] getPlateauBase() {
+    public Hashtable getPlateauBase() {
         return plateauBase;
     }
 
-    public void setPlateauBase(String[] plateauBase) {
+    public void setPlateauBase(Hashtable plateauBase) {
         this.plateauBase = plateauBase;
     }
 
@@ -30,27 +32,27 @@ public class Plateau {
         this.tailleTab = tailleTab;
     }
 
-    public double getPlaceMur() {
+    public int getPlaceMur() {
         return placeMur;
     }
 
-    public void setPlaceMur(double placeMur) {
+    public void setPlaceMur(int placeMur) {
         this.placeMur = placeMur;
     }
 
-    public double getPlaceJ1() {
+    public int getPlaceJ1() {
         return placeJ1;
     }
 
-    public void setPlaceJ1(double placeJ1) {
+    public void setPlaceJ1(int placeJ1) {
         this.placeJ1 = placeJ1;
     }
 
-    public double getPlaceJ2() {
+    public int getPlaceJ2() {
         return placeJ2;
     }
 
-    public void setPlaceJ2(double placeJ2) {
+    public void setPlaceJ2(int placeJ2) {
         this.placeJ2 = placeJ2;
     }
 }

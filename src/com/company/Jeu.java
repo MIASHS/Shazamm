@@ -61,6 +61,7 @@ public class Jeu {
 
     public void choixPuissance(){
         for (int i=0; i<listJoueur.size();i++) {
+            System.out.println("Joueur "+i+" à vous !");
             Scanner sc = new Scanner(System.in);
             System.out.println("Saisissez un entier : ");
             int puissance = sc.nextInt();
@@ -79,25 +80,45 @@ public class Jeu {
 
 
     public void attaquer(Plateau plateau){
-            plateau.getPlateauBase();
-            plateau.setPlateauBase(plateau.getPlateauBase());// ATTENTION
-            System.out.println("Taille tab avant   "+plateau.getTailleTab());
-            this.choixPuissance();
-            if (listJoueur.get(0).getPuissanceCoup()<listJoueur.get(1).getPuissanceCoup()){
-                System.out.println("Pas assez fort batard "+listJoueur.get(1).getNumJoueur() +" gagne");
-                plateau.setPlaceMur(plateau.getPlaceMur()-1);
-                System.out.println("Taille tab après "+plateau.getTailleTab());
-                System.out.println("Place du mur "+plateau.getPlaceMur()+"    Place J1  "+plateau.getPlaceJ1()+"      Place J2  "+plateau.getPlaceJ2());
-            }else if (listJoueur.get(0).getPuissanceCoup()> listJoueur.get(1).getPuissanceCoup()){
 
-            System.out.println("Trop fort batard le joueur "+listJoueur.get(0).getNumJoueur()+" gagne");
-            }else if (listJoueur.get(0).getPuissanceCoup()== listJoueur.get(1).getPuissanceCoup()){
+            this.choixPuissance();
+            if (listJoueur.get(0).getPuissanceCoup() < listJoueur.get(1).getPuissanceCoup()) {
+                System.out.println("Pas assez fort batard " + listJoueur.get(1).getNumJoueur() + " gagne");
+                plateau.setPlaceMur(plateau.getPlaceMur() - 1);
+                plateau.setPlaceJ1(plateau.getPlaceJ1() - 1);
+                plateau.setPlaceJ2(plateau.getPlaceJ2() - 1);
+                plateau.plateauBase.put("m", plateau.getPlaceMur());
+                plateau.plateauBase.put("J1", plateau.getPlaceJ1());
+                plateau.plateauBase.put("J2", plateau.getPlaceJ2());
+                Enumeration enumeration = plateau.plateauBase.elements();
+                while (enumeration.hasMoreElements()) {
+                    System.out.println("Hashtable " + enumeration.nextElement());
+                }
+
+            } else if (listJoueur.get(0).getPuissanceCoup() > listJoueur.get(1).getPuissanceCoup()) {
+                plateau.setPlaceMur(plateau.getPlaceMur() + 1);
+                plateau.setPlaceJ1(plateau.getPlaceJ1() + 1);
+                plateau.setPlaceJ2(plateau.getPlaceJ2() + 1);
+                plateau.plateauBase.put("m", plateau.getPlaceMur());
+                plateau.plateauBase.put("J1", plateau.getPlaceJ1());
+                plateau.plateauBase.put("J2", plateau.getPlaceJ2());
+                Enumeration enumeration = plateau.plateauBase.elements();
+                while (enumeration.hasMoreElements()) {
+                    System.out.println("Hashtable " + enumeration.nextElement());
+                }
+
+                System.out.println("Trop fort batard le joueur " + listJoueur.get(0).getNumJoueur() + " gagne");
+            } else if (listJoueur.get(0).getPuissanceCoup() == listJoueur.get(1).getPuissanceCoup()) {
 
                 System.out.println(" Même patate pour les deux joueurs");
-            }else {
+            } else {
                 System.out.println("OUALALALA");
             }
-    }
+        Enumeration enumeration = plateau.plateauBase.elements();
+        while (enumeration.hasMoreElements()) {
+            System.out.println("Hashtable fin du tour " + enumeration.nextElement());
+        }
+        }
 
     public void plateauJeu(){
         if (nbManches==0) {
