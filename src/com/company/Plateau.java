@@ -11,6 +11,9 @@ public class Plateau {
     private int placeMur = (tailleTab/2);
     private int placeJ1 = placeMur-3;
     private int placeJ2= placeMur+3;
+//    private int placeJ1 = 1;
+//    private int placeJ2= 3;
+
 
 
     public Plateau() {

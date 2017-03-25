@@ -44,9 +44,12 @@ public class Jeu {
         init();
         superPaquet();
         melanger(50);
-        attaquer(p);
-        plateauJeu();
+        while (listJoueur.size()==2) {
 
+
+            attaquer(p);
+            plateauJeu();
+        }
 
 
     }
@@ -94,11 +97,14 @@ public class Jeu {
                 plateau.plateauBase.put("J2", plateau.getPlaceJ2());
                 if (plateau.getPlaceJ1()==0){
                     System.out.println("Bien joué J2");
+                    listJoueur.remove(0);
+                    System.out.println("FIN DU GAME !!!! ");
+                    System.out.println(listJoueur.get(0).getNomJoueur()+" gagne la game");
                 }
                 Enumeration enumeration = plateau.plateauBase.elements();
-                while (enumeration.hasMoreElements()) {
-                    System.out.println("Hashtable " + enumeration.nextElement());
-                }
+//                while (enumeration.hasMoreElements()) {
+//                    System.out.println("Hashtable " + enumeration.nextElement());
+//                }
 
             } else if (listJoueur.get(0).getPuissanceCoup() > listJoueur.get(1).getPuissanceCoup()) {
                 plateau.setPlaceMur(plateau.getPlaceMur() + 1);
@@ -109,11 +115,12 @@ public class Jeu {
                 plateau.plateauBase.put("J2", plateau.getPlaceJ2());
                 if (plateau.getPlaceJ1()==21){
                     System.out.println(" Bien joué J1");
+
                 }
-                Enumeration enumeration = plateau.plateauBase.elements();
-                while (enumeration.hasMoreElements()) {
-                    System.out.println("Hashtable " + enumeration.nextElement());
-                }
+//                Enumeration enumeration = plateau.plateauBase.elements();
+//                while (enumeration.hasMoreElements()) {
+//                    System.out.println("Hashtable " + enumeration.nextElement());
+//                }
 
                 System.out.println("Trop fort batard le joueur " + listJoueur.get(0).getNumJoueur() + " gagne");
             } else if (listJoueur.get(0).getPuissanceCoup() == listJoueur.get(1).getPuissanceCoup()) {
@@ -122,10 +129,10 @@ public class Jeu {
             } else {
                 System.out.println("OUALALALA");
             }
-        Enumeration enumeration = plateau.plateauBase.elements();
-        while (enumeration.hasMoreElements()) {
-            System.out.println("Hashtable fin du tour " + enumeration.nextElement());
-        }
+//        Enumeration enumeration = plateau.plateauBase.elements();
+//        while (enumeration.hasMoreElements()) {
+//            System.out.println("Hashtable fin du tour " + enumeration.nextElement());
+//        }
             nbTours+=1;
         }
 
