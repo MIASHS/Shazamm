@@ -48,6 +48,7 @@ public class Jeu {
         plateauJeu();
 
 
+
     }
 
 
@@ -83,13 +84,17 @@ public class Jeu {
 
             this.choixPuissance();
             if (listJoueur.get(0).getPuissanceCoup() < listJoueur.get(1).getPuissanceCoup()) {
-                System.out.println("Pas assez fort batard " + listJoueur.get(1).getNumJoueur() + " gagne");
+                System.out.println("Pas assez fort batard " + listJoueur.get(1).getNumJoueur() + " gagne le tour");
+
                 plateau.setPlaceMur(plateau.getPlaceMur() - 1);
                 plateau.setPlaceJ1(plateau.getPlaceJ1() - 1);
                 plateau.setPlaceJ2(plateau.getPlaceJ2() - 1);
                 plateau.plateauBase.put("m", plateau.getPlaceMur());
                 plateau.plateauBase.put("J1", plateau.getPlaceJ1());
                 plateau.plateauBase.put("J2", plateau.getPlaceJ2());
+                if (plateau.getPlaceJ1()==0){
+                    System.out.println("Bien joué J2");
+                }
                 Enumeration enumeration = plateau.plateauBase.elements();
                 while (enumeration.hasMoreElements()) {
                     System.out.println("Hashtable " + enumeration.nextElement());
@@ -102,6 +107,9 @@ public class Jeu {
                 plateau.plateauBase.put("m", plateau.getPlaceMur());
                 plateau.plateauBase.put("J1", plateau.getPlaceJ1());
                 plateau.plateauBase.put("J2", plateau.getPlaceJ2());
+                if (plateau.getPlaceJ1()==21){
+                    System.out.println(" Bien joué J1");
+                }
                 Enumeration enumeration = plateau.plateauBase.elements();
                 while (enumeration.hasMoreElements()) {
                     System.out.println("Hashtable " + enumeration.nextElement());
@@ -118,6 +126,7 @@ public class Jeu {
         while (enumeration.hasMoreElements()) {
             System.out.println("Hashtable fin du tour " + enumeration.nextElement());
         }
+            nbTours+=1;
         }
 
     public void plateauJeu(){
@@ -130,6 +139,7 @@ public class Jeu {
 //            System.out.print(" Connard de joueur 1 [" + i + "]=" + tableauEntier[i] + " ");
 //        }
     }
+
 
 
     public void init() {
@@ -191,9 +201,10 @@ public class Jeu {
         finTour=true;
     }
 
-    public void setFinManche(){
+    public void FinManche(Plateau plateau){
 
         finManche=true;
+        plateau.setTailleTab(plateau.getTailleTab()-2);
     }
 
 
