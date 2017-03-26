@@ -103,7 +103,7 @@ public class Jeu {
                     plateau.plateauBase.put("m", plateau.getPlaceMur());
                     plateau.plateauBase.put("J2", plateau.getPlaceJ2()-3);
 
-                }if (plateau.getPlaceJ1()==0){
+                }if (plateau.getPlaceJ1()==0){          // Condition si J1 est à 0
                     System.out.println("Fin du game");
                 }
                 //Enumeration enumeration = plateau.plateauBase.elements();
@@ -129,6 +129,8 @@ public class Jeu {
                     plateau.plateauBase.put("m", plateau.getPlaceMur());
                     plateau.plateauBase.put("J2", plateau.getPlaceJ2()+3);
 
+                }if (plateau.getPlaceJ2()==plateau.getTailleTab()){          // Condition si J2 est au bout du plateau droit
+                    System.out.println("Fin du game");
                 }
 
                 System.out.println("Trop fort batard le joueur " + listJoueur.get(0).getNumJoueur() + " gagne");
