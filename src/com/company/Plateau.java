@@ -7,12 +7,11 @@ import java.util.Hashtable;
  */
 public class Plateau {
     private int tailleTab=21;
-    Hashtable plateauBase = new Hashtable();
+    Hashtable plateauBase = new Hashtable(tailleTab);
     private int placeMur = (tailleTab/2);
     private int placeJ1 = placeMur-3;
     private int placeJ2= placeMur+3;
-//    private int placeJ1 = 1;
-//    private int placeJ2= 3;
+
 
 
 

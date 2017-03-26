@@ -10,15 +10,12 @@ public class Jeu {
 
     private ArrayList<Joueur> listJoueur;
     private int nbJoueus;
-    private int nbManches;
+    private int nbManches=1;
     private int nbTours;
     private boolean finTour=false;
     private boolean finManche=false;
     private Carte[] cartesJ1 = new Carte[15];
     private Carte[] cartesJ2 = new Carte[15];
-
-    Boolean vert= false;
-    Boolean rouge= false;
 
 
 
@@ -44,11 +41,9 @@ public class Jeu {
         init();
         superPaquet();
         melanger(50);
+
         while (listJoueur.size()==2) {
-
-
             attaquer(p);
-            plateauJeu();
         }
 
 
@@ -84,43 +79,57 @@ public class Jeu {
 
 
     public void attaquer(Plateau plateau){
-
             this.choixPuissance();
+        Enumeration enumeration = plateau.plateauBase.elements();
+        while (enumeration.hasMoreElements()) {
+            System.out.println("Résultat du debut du tour " + enumeration.nextElement());
+        }
+            //Attaque du joueur 1 pas assez forte
             if (listJoueur.get(0).getPuissanceCoup() < listJoueur.get(1).getPuissanceCoup()) {
                 System.out.println("Pas assez fort batard " + listJoueur.get(1).getNumJoueur() + " gagne le tour");
-
                 plateau.setPlaceMur(plateau.getPlaceMur() - 1);
-                plateau.setPlaceJ1(plateau.getPlaceJ1() - 1);
-                plateau.setPlaceJ2(plateau.getPlaceJ2() - 1);
-                plateau.plateauBase.put("m", plateau.getPlaceMur());
                 plateau.plateauBase.put("J1", plateau.getPlaceJ1());
+                plateau.plateauBase.put("m", plateau.getPlaceMur());
                 plateau.plateauBase.put("J2", plateau.getPlaceJ2());
-                if (plateau.getPlaceJ1()==0){
+                if (plateau.getPlaceJ1()==plateau.getPlaceMur()){
                     System.out.println("Bien joué J2");
-                    listJoueur.remove(0);
-                    System.out.println("FIN DU GAME !!!! ");
-                    System.out.println(listJoueur.get(0).getNomJoueur()+" gagne la game");
+                    System.out.println("FIN DE LA MANCHE !!!! ");
+                    System.out.println(listJoueur.get(1).getNomJoueur()+" gagne la manche");
+                    nbManches+=1;
+                    System.out.println("Nombre de manches " +nbManches);
+                    FinManche(plateau);
+                    System.out.println("Taille tab "+plateau.getTailleTab());
+                    plateau.plateauBase.put("J1", plateau.getPlaceJ1()-3);
+                    plateau.plateauBase.put("m", plateau.getPlaceMur());
+                    plateau.plateauBase.put("J2", plateau.getPlaceJ2()-3);
+
+                }if (plateau.getPlaceJ1()==0){
+                    System.out.println("Fin du game");
                 }
-                Enumeration enumeration = plateau.plateauBase.elements();
+                //Enumeration enumeration = plateau.plateauBase.elements();
 //                while (enumeration.hasMoreElements()) {
 //                    System.out.println("Hashtable " + enumeration.nextElement());
 //                }
 
+                //Attaque du joueur 2 pas assez forte
             } else if (listJoueur.get(0).getPuissanceCoup() > listJoueur.get(1).getPuissanceCoup()) {
                 plateau.setPlaceMur(plateau.getPlaceMur() + 1);
-                plateau.setPlaceJ1(plateau.getPlaceJ1() + 1);
-                plateau.setPlaceJ2(plateau.getPlaceJ2() + 1);
-                plateau.plateauBase.put("m", plateau.getPlaceMur());
                 plateau.plateauBase.put("J1", plateau.getPlaceJ1());
+                plateau.plateauBase.put("m", plateau.getPlaceMur());
                 plateau.plateauBase.put("J2", plateau.getPlaceJ2());
-                if (plateau.getPlaceJ1()==21){
+                if (plateau.getPlaceJ2()==plateau.getPlaceMur()){
                     System.out.println(" Bien joué J1");
+                    System.out.println("FIN DE LA MANCHE !!!! ");
+                    System.out.println(listJoueur.get(0).getNomJoueur()+" gagne la manche");
+                    nbManches+=1;
+                    System.out.println("Nombre de manches " +nbManches);
+                    FinManche(plateau);
+                    System.out.println("Taille tab "+plateau.getTailleTab());
+                    plateau.plateauBase.put("J1", plateau.getPlaceJ1()+3);
+                    plateau.plateauBase.put("m", plateau.getPlaceMur());
+                    plateau.plateauBase.put("J2", plateau.getPlaceJ2()+3);
 
                 }
-//                Enumeration enumeration = plateau.plateauBase.elements();
-//                while (enumeration.hasMoreElements()) {
-//                    System.out.println("Hashtable " + enumeration.nextElement());
-//                }
 
                 System.out.println("Trop fort batard le joueur " + listJoueur.get(0).getNumJoueur() + " gagne");
             } else if (listJoueur.get(0).getPuissanceCoup() == listJoueur.get(1).getPuissanceCoup()) {
@@ -129,23 +138,20 @@ public class Jeu {
             } else {
                 System.out.println("OUALALALA");
             }
-//        Enumeration enumeration = plateau.plateauBase.elements();
-//        while (enumeration.hasMoreElements()) {
-//            System.out.println("Hashtable fin du tour " + enumeration.nextElement());
-//        }
-            nbTours+=1;
-        }
 
-    public void plateauJeu(){
-        if (nbManches==0) {
-            int tableauEntier[] = new int[21];
-            tableauEntier[19 / 2 + 1] = 11;
-        }
+        Enumeration enumeration2 = plateau.plateauBase.elements();
+        while (enumeration2.hasMoreElements()) {
+           System.out.println("Résultat de la fin du tour " + enumeration2.nextElement());
+       }
+            nbTours+=1;
+    }
+
+
 
 //        for (int i = 1; i < tableauEntier.length; i++) {
 //            System.out.print(" Connard de joueur 1 [" + i + "]=" + tableauEntier[i] + " ");
 //        }
-    }
+
 
 
 
@@ -158,6 +164,12 @@ public class Jeu {
             cartesJ2[i] = new Carte(i, "\n");
             i++;
         }
+    }
+
+    public void nouvelleManche(Plateau plateau){
+
+
+
     }
 
     public void superPaquet(){
@@ -190,28 +202,32 @@ public class Jeu {
 
     public void couleurJoueur(){
         Random ra = new Random();
-
+        Boolean coulVert= false;
+        Boolean coulRouge= false;
         int fonction = ra.nextInt(2);
-        for (int i=0; i<listJoueur.size();i++) {
             if (fonction == 1) {
-                System.out.println("Sorcier " + listJoueur.get(i).getNumJoueur() + " est le sorcier rouge");
+               coulRouge=true;
+                System.out.println("Sorcier " + listJoueur.get(0).getNomJoueur() + " est le sorcier rouge");
+                if (coulRouge==true){
+                    System.out.println("Sorcier " + listJoueur.get(1).getNomJoueur() + " est le sorcier vert");
 
+                }
             } else {
-                System.out.println("Sorcier " + listJoueur.get(i).getNumJoueur() + "est le sorcier vert");
-
+                coulVert=true;
+                System.out.println("Sorcier " + listJoueur.get(0).getNomJoueur() + " est le sorcier vert");
+                System.out.println("Sorcier " + listJoueur.get(1).getNomJoueur() + " est le sorcier rouge");
             }
         }
-    }
 
-    public void finTour(){
-
-        finTour=true;
-    }
 
     public void FinManche(Plateau plateau){
 
-        finManche=true;
+        if (nbManches==2){
         plateau.setTailleTab(plateau.getTailleTab()-2);
+
+    }else if (nbManches==3){
+            plateau.setTailleTab(plateau.getTailleTab()-2);
+        }
     }
 
 
