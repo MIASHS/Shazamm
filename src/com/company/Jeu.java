@@ -120,13 +120,6 @@ public class Jeu {
                     plateau.plateauBase.put("m", plateau.getPlaceMur());
                     plateau.plateauBase.put("J2", plateau.getPlaceJ2()-3);
 
-                }else if ((listJoueur.get(0).getPointMana()<0)||(listJoueur.get(0).getPointMana()==0)){             // Condition si J2 a plus de points de mana
-                    System.out.println(" Joueur "+listJoueur.get(1).getNumJoueur()+" a perdu la manche");
-                    System.out.println("attention plus de mana ");
-                    FinManche(plateau);
-//                }else if (listJoueur.get(0).getPointMana()==0){
-//                    System.out.println("attention plus de mana ");
-//                    FinManche(plateau);
                 }
 
 
@@ -150,12 +143,6 @@ public class Jeu {
 
                 }if (plateau.getPlaceJ2()==plateau.getTailleTab()){          // Condition si J2 est au bout du plateau droit
                     System.out.println("Fin du game");
-                }else if (listJoueur.get(1).getPointMana()<0){             // Condition si J2 a plus de points de mana
-                    System.out.println(" Joueur "+listJoueur.get(1).getNumJoueur()+" a perdu la manche");
-                    FinManche(plateau);
-                }else if (listJoueur.get(1).getPointMana()==0){
-                    System.out.println("attention plus de mana ");
-                    FinManche(plateau);
                 }
 
             } else if (listJoueur.get(0).getPuissanceCoup() == listJoueur.get(1).getPuissanceCoup()) {
@@ -241,12 +228,14 @@ public class Jeu {
 
     public void FinManche(Plateau plateau){
 
-        if (nbManches>1){
+        if (nbManches>=1){
         plateau.setTailleTab(plateau.getTailleTab()-2);
-        for (int i=0; i<listJoueur.size();i++){
-            listJoueur.get(i).setPointMana(50);
-            System.out.println("Joueur"+listJoueur.get(i).getNomJoueur()+" a "+listJoueur.get(i).getPointMana()+" points de mana");
-        }
+  //      for (int i=0; i<listJoueur.size();i++){
+            listJoueur.get(0).setPointMana(50);
+            System.out.println("Joueur "+listJoueur.get(0).getNomJoueur()+" a "+listJoueur.get(0).getPointMana()+" points de mana");
+            listJoueur.get(1).setPointMana(50);
+            System.out.println("Joueur "+listJoueur.get(1).getNomJoueur()+" a "+listJoueur.get(1).getPointMana()+" points de mana");
+    //    }
         }
     }
 
