@@ -39,7 +39,7 @@ public class Jeu {
         Plateau p= new Plateau();
         couleurJoueur();
         init();
-        superPaquet();
+//        superPaquet();
         melanger(50);
 
         while (listJoueur.size()==2) {
@@ -58,28 +58,42 @@ public class Jeu {
 //            }
 //        }
 
-    public void choixPuissance(){
+    public void choixPuissance(Plateau plateau){
         for (int i=0; i<listJoueur.size();i++) {
-            System.out.println("Joueur "+i+" à vous !");
+
+            if (listJoueur.get(i).getPointMana()==0){
+                FinManche(plateau);
+                System.out.println(" Joueur "+listJoueur.get(i).getNomJoueur()+" a plus de mana, fin du tour");
+
+            }
+            System.out.println("Joueur " + i + " à vous !");
             Scanner sc = new Scanner(System.in);
             System.out.println("Saisissez un entier : ");
             int puissance = sc.nextInt();
-            listJoueur.get(i).setPuissanceCoup(puissance);
-            listJoueur.get(i).setPointMana(listJoueur.get(i).getPointMana() - puissance);
-            if (puissance > listJoueur.get(i).getPointMana()) {
+
+            if ((listJoueur.get(i).getPointMana()<=0)||(listJoueur.get(i).getPointMana()==0)){ // Condition si J1 a plus de points de mana
+                System.out.println(" Joueur "+listJoueur.get(i).getNumJoueur()+" a perdu la manche");
+                FinManche(plateau);
+                System.out.println("Nouveau tour");
+                break;
+            } else if (puissance > listJoueur.get(i).getPointMana()) {
                 System.out.println("Pas possible FDP recommence");
-            } else {
+                System.out.println("Points de mana Joueur "+listJoueur.get(i).getPointMana());
+                choixPuissance(plateau);
+                break;
+            }else {
+                listJoueur.get(i).setPuissanceCoup(puissance);
+                listJoueur.get(i).setPointMana(listJoueur.get(i).getPointMana() - puissance);
                 System.out.println(" Puissance du coup " + puissance);
                 System.out.println("il reste " + listJoueur.get(i).getPointMana() + " points de Mana");
             }
-
         }
+
     }
 
-
-
     public void attaquer(Plateau plateau){
-            this.choixPuissance();
+            this.choixPuissance(plateau);
+
         Enumeration enumeration = plateau.plateauBase.elements();
         while (enumeration.hasMoreElements()) {
             System.out.println("Résultat du debut du tour " + enumeration.nextElement());
@@ -91,7 +105,10 @@ public class Jeu {
                 plateau.plateauBase.put("J1", plateau.getPlaceJ1());
                 plateau.plateauBase.put("m", plateau.getPlaceMur());
                 plateau.plateauBase.put("J2", plateau.getPlaceJ2());
-                if (plateau.getPlaceJ1()==plateau.getPlaceMur()){
+                if (plateau.getPlaceJ1()==0){          // Condition si J1 est à 0
+                    System.out.println("Fin du game");
+                }
+               else if (plateau.getPlaceJ1()==plateau.getPlaceMur()){
                     System.out.println("Bien joué J2");
                     System.out.println("FIN DE LA MANCHE !!!! ");
                     System.out.println(listJoueur.get(1).getNomJoueur()+" gagne la manche");
@@ -103,13 +120,15 @@ public class Jeu {
                     plateau.plateauBase.put("m", plateau.getPlaceMur());
                     plateau.plateauBase.put("J2", plateau.getPlaceJ2()-3);
 
-                }if (plateau.getPlaceJ1()==0){          // Condition si J1 est à 0
-                    System.out.println("Fin du game");
+                }else if ((listJoueur.get(0).getPointMana()<0)||(listJoueur.get(0).getPointMana()==0)){             // Condition si J2 a plus de points de mana
+                    System.out.println(" Joueur "+listJoueur.get(1).getNumJoueur()+" a perdu la manche");
+                    System.out.println("attention plus de mana ");
+                    FinManche(plateau);
+//                }else if (listJoueur.get(0).getPointMana()==0){
+//                    System.out.println("attention plus de mana ");
+//                    FinManche(plateau);
                 }
-                //Enumeration enumeration = plateau.plateauBase.elements();
-//                while (enumeration.hasMoreElements()) {
-//                    System.out.println("Hashtable " + enumeration.nextElement());
-//                }
+
 
                 //Attaque du joueur 2 pas assez forte
             } else if (listJoueur.get(0).getPuissanceCoup() > listJoueur.get(1).getPuissanceCoup()) {
@@ -131,9 +150,14 @@ public class Jeu {
 
                 }if (plateau.getPlaceJ2()==plateau.getTailleTab()){          // Condition si J2 est au bout du plateau droit
                     System.out.println("Fin du game");
+                }else if (listJoueur.get(1).getPointMana()<0){             // Condition si J2 a plus de points de mana
+                    System.out.println(" Joueur "+listJoueur.get(1).getNumJoueur()+" a perdu la manche");
+                    FinManche(plateau);
+                }else if (listJoueur.get(1).getPointMana()==0){
+                    System.out.println("attention plus de mana ");
+                    FinManche(plateau);
                 }
 
-                System.out.println("Trop fort batard le joueur " + listJoueur.get(0).getNumJoueur() + " gagne");
             } else if (listJoueur.get(0).getPuissanceCoup() == listJoueur.get(1).getPuissanceCoup()) {
 
                 System.out.println(" Même patate pour les deux joueurs");
@@ -160,27 +184,20 @@ public class Jeu {
     public void init() {
         for (int i = 0; i < 15; i++) {
             cartesJ1[i] = new Carte(i, "\n");
-            i++;
         }
         for (int i = 0; i < 15; i++) {
             cartesJ2[i] = new Carte(i, "\n");
-            i++;
         }
     }
 
-    public void nouvelleManche(Plateau plateau){
-
-
-
-    }
 
     public void superPaquet(){
 
         for (int i = 1; i < cartesJ1.length; i++) {
-            System.out.print(" Connard de joueur 1 [" + i + "]=" + cartesJ1[i] + " ");
+            System.out.print(" Cartes joueur 1 [" + i + "]=" + cartesJ1[i] + " ");
         }
         for (int i = 1; i < cartesJ2.length; i++) {
-            System.out.print(" Connard de joueur 2 [" + i + "]=" + cartesJ2[i] + " ");
+            System.out.print(" Cartes joueur 2 [" + i + "]=" + cartesJ2[i] + " ");
         }
 
     }
@@ -224,11 +241,12 @@ public class Jeu {
 
     public void FinManche(Plateau plateau){
 
-        if (nbManches==2){
+        if (nbManches>1){
         plateau.setTailleTab(plateau.getTailleTab()-2);
-
-    }else if (nbManches==3){
-            plateau.setTailleTab(plateau.getTailleTab()-2);
+        for (int i=0; i<listJoueur.size();i++){
+            listJoueur.get(i).setPointMana(50);
+            System.out.println("Joueur"+listJoueur.get(i).getNomJoueur()+" a "+listJoueur.get(i).getPointMana()+" points de mana");
+        }
         }
     }
 
