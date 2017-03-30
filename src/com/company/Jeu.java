@@ -59,21 +59,22 @@ public class Jeu {
 //        }
 
     public void choixPuissance(Plateau plateau){
+        System.out.println(" le nombre de cases est de "+plateau.getTailleTab());
         for (int i=0; i<listJoueur.size();i++) {
 
             if (listJoueur.get(i).getPointMana()==0){
+
                 FinManche(plateau);
                 System.out.println(" Joueur "+listJoueur.get(i).getNomJoueur()+" a plus de mana, fin du tour");
-
             }
-            System.out.println("Joueur " + i + " à vous !");
+            System.out.println("Joueur " + listJoueur.get(i).getNomJoueur() + " à vous !");
             Scanner sc = new Scanner(System.in);
             System.out.println("Saisissez un entier : ");
             int puissance = sc.nextInt();
 
-            if ((listJoueur.get(i).getPointMana()<=0)||(listJoueur.get(i).getPointMana()==0)){ // Condition si J1 a plus de points de mana
-                System.out.println(" Joueur "+listJoueur.get(i).getNumJoueur()+" a perdu la manche");
+            if ((listJoueur.get(i).getPointMana()<=0)){ // Condition si J1 a plus de points de mana
                 FinManche(plateau);
+                System.out.println(" Joueur "+listJoueur.get(i).getNumJoueur()+" a perdu la manche");
                 System.out.println("Nouveau tour");
                 break;
             } else if (puissance > listJoueur.get(i).getPointMana()) {
@@ -86,6 +87,7 @@ public class Jeu {
                 listJoueur.get(i).setPointMana(listJoueur.get(i).getPointMana() - puissance);
                 System.out.println(" Puissance du coup " + puissance);
                 System.out.println("il reste " + listJoueur.get(i).getPointMana() + " points de Mana");
+                System.out.println("");
             }
         }
 
@@ -93,6 +95,7 @@ public class Jeu {
 
     public void attaquer(Plateau plateau){
             this.choixPuissance(plateau);
+
 
         Enumeration enumeration = plateau.plateauBase.elements();
         while (enumeration.hasMoreElements()) {
@@ -143,6 +146,8 @@ public class Jeu {
 
                 }if (plateau.getPlaceJ2()==plateau.getTailleTab()){          // Condition si J2 est au bout du plateau droit
                     System.out.println("Fin du game");
+                }else  if ((plateau.getPlaceJ2()>=plateau.getTabLave())){
+                    System.out.println(" PUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUTTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
                 }
 
             } else if (listJoueur.get(0).getPuissanceCoup() == listJoueur.get(1).getPuissanceCoup()) {
@@ -227,16 +232,18 @@ public class Jeu {
 
 
     public void FinManche(Plateau plateau){
-
-        if (nbManches>=1){
-        plateau.setTailleTab(plateau.getTailleTab()-2);
   //      for (int i=0; i<listJoueur.size();i++){
             listJoueur.get(0).setPointMana(50);
             System.out.println("Joueur "+listJoueur.get(0).getNomJoueur()+" a "+listJoueur.get(0).getPointMana()+" points de mana");
             listJoueur.get(1).setPointMana(50);
             System.out.println("Joueur "+listJoueur.get(1).getNomJoueur()+" a "+listJoueur.get(1).getPointMana()+" points de mana");
-    //    }
-        }
+            nbManches+=1;
+            if (nbManches>1){
+                plateau.setTabLave(plateau.getTabLave()-2);
+                System.out.println("LAVE "+plateau.getTabLave());
+
+            }
+        // }
     }
 
 
