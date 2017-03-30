@@ -68,6 +68,7 @@ public class Jeu {
                 System.out.println(" Joueur "+listJoueur.get(i).getNomJoueur()+" a plus de mana, fin du tour");
             }
             System.out.println("Joueur " + listJoueur.get(i).getNomJoueur() + " à vous !");
+            System.out.print("Joueur " + listJoueur.get(i).getNomJoueur());
             Scanner sc = new Scanner(System.in);
             System.out.println("Saisissez un entier : ");
             int puissance = sc.nextInt();
@@ -82,7 +83,8 @@ public class Jeu {
                 System.out.println("Points de mana Joueur "+listJoueur.get(i).getPointMana());
                 choixPuissance(plateau);
                 break;
-            }else {
+            }
+            else {
                 listJoueur.get(i).setPuissanceCoup(puissance);
                 listJoueur.get(i).setPointMana(listJoueur.get(i).getPointMana() - puissance);
                 System.out.println(" Puissance du coup " + puissance);
@@ -115,7 +117,7 @@ public class Jeu {
                     System.out.println("Bien joué J2");
                     System.out.println("FIN DE LA MANCHE !!!! ");
                     System.out.println(listJoueur.get(1).getNomJoueur()+" gagne la manche");
-                    nbManches+=1;
+
                     System.out.println("Nombre de manches " +nbManches);
                     FinManche(plateau);
                     System.out.println("Taille tab "+plateau.getTailleTab());
@@ -136,18 +138,18 @@ public class Jeu {
                     System.out.println(" Bien joué J1");
                     System.out.println("FIN DE LA MANCHE !!!! ");
                     System.out.println(listJoueur.get(0).getNomJoueur()+" gagne la manche");
-                    nbManches+=1;
                     System.out.println("Nombre de manches " +nbManches);
                     FinManche(plateau);
                     System.out.println("Taille tab "+plateau.getTailleTab());
                     plateau.plateauBase.put("J1", plateau.getPlaceJ1()+3);
                     plateau.plateauBase.put("m", plateau.getPlaceMur());
                     plateau.plateauBase.put("J2", plateau.getPlaceJ2()+3);
-
+                    if (plateau.getPlaceJ2()>=plateau.getTabLave()){
+                        System.out.println("TU AS PERDU J2");
+                    }
                 }if (plateau.getPlaceJ2()==plateau.getTailleTab()){          // Condition si J2 est au bout du plateau droit
                     System.out.println("Fin du game");
-                }else  if ((plateau.getPlaceJ2()>=plateau.getTabLave())){
-                    System.out.println(" PUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUTTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+
                 }
 
             } else if (listJoueur.get(0).getPuissanceCoup() == listJoueur.get(1).getPuissanceCoup()) {
