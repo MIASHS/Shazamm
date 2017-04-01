@@ -9,7 +9,7 @@ public class Plateau {
     private int tailleTab=19;
     private int tabLave=19;
     Hashtable plateauBase = new Hashtable(tailleTab);
-    private int placeMur = 10;
+    private int placeMur = tailleTab/2+1;
     private int placeJ1 = placeMur-3;
     private int placeJ2= placeMur+3;
 
