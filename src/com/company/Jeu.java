@@ -16,11 +16,12 @@ public class Jeu {
     private boolean finManche=false;
     private Carte[] cartesJ1 = new Carte[15];
     private Carte[] cartesJ2 = new Carte[15];
+    private ArrayList <Carte> listCarte;
 
 
 
     public void debutJeu(){
-
+        this.listCarte=new ArrayList<Carte>();
         this.listJoueur= new ArrayList<Joueur>();
         int numJoueur=0;
         int pointMana=50;
@@ -51,24 +52,24 @@ public class Jeu {
     }
 
 
-//    public void init() {
-//            for (int j =0; j<14;j++){
-//                Carte c =new Carte(j," ");
-//                this.cartesTotal2.add(c);
-//                this.cartesTotal1.add(c);
-//            }
-//        }
+       public void init() {
+            for (int j =0; j<14;j++){
+                Carte c =new Carte(j," ");
+                this.listCarte.add(c);
+
+            }
+        }
 
     public void choixPuissance(Plateau plateau){
         System.out.println(" le nombre de cases est de "+plateau.getTailleTab());
-
         for (int i=0; i<listJoueur.size();i++) {
 
             if (listJoueur.get(i).getPointMana()==0){
-
                 FinManche(plateau);
                 System.out.println(" Joueur "+listJoueur.get(i).getNomJoueur()+" a plus de mana, fin du tour");
             }
+
+
             System.out.println("Joueur " + listJoueur.get(i).getNomJoueur() + " à vous !");
             Scanner sc = new Scanner(System.in);
             System.out.println("Saisissez un entier : ");
@@ -89,21 +90,26 @@ public class Jeu {
                 listJoueur.get(i).setPuissanceCoup(puissance);
                 listJoueur.get(i).setPointMana(listJoueur.get(i).getPointMana() - puissance);
                 System.out.println(" Puissance du coup " + puissance);
+                this.choixCarte(plateau);
+                System.out.println(" la puissance du coup est "+listJoueur.get(i).getPuissanceCoup());
                 System.out.println("il reste " + listJoueur.get(i).getPointMana() + " points de Mana");
                 System.out.println("");
+
             }
+
         }
+
 
     }
 
-    public void attaquer(Plateau plateau,Joueur joueur, Carte carte) {
+    public void attaquer(Plateau plateau) {
         this.choixPuissance(plateau);
-        this.choixCarte(carte,joueur,plateau);
 //        Enumeration enumeration = plateau.plateauBase.elements();
 //        while (enumeration.hasMoreElements()) {
 //            System.out.println("Résultat du debut du tour " + enumeration.nextElement());
 //        }
             //Attaque du joueur 1 pas assez forte
+
             if (listJoueur.get(0).getPuissanceCoup() < listJoueur.get(1).getPuissanceCoup()) {
                 System.out.println("Pas assez fort batard " + listJoueur.get(1).getNumJoueur() + " gagne le tour");
                 plateau.setPlaceMur(plateau.getPlaceMur() - 1);
@@ -165,35 +171,78 @@ public class Jeu {
 
 
 
-    public void init() {
-        for (int i = 0; i < 6; i++) {
-            cartesJ1[i] = new Carte(i, "\n");
-            melanger(50);
+//    public void init() {
+//        for (int i = 0; i < 6; i++) {
+//            cartesJ1[i] = new Carte(i, "\n");
+//            melanger(50);
+//
+//        }
+//        for (int i = 0; i < 6; i++) {
+//            cartesJ2[i] = new Carte(i, "\n");
+//            melanger(50);
+//
+//        }
+//    }
 
-        }
-        for (int i = 0; i < 6; i++) {
-            cartesJ2[i] = new Carte(i, "\n");
-            melanger(50);
-
-        }
+    public void choixCarte(Plateau plateau){
+        this.pouvoirCarte(plateau);
     }
 
-    public void choixCarte(Carte carte,Joueur joueur,Plateau plateau){
+    public void pouvoirCarte(Plateau plateau){
+        for (int i = 0;i<listJoueur.size();i++) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Saisissez une carte : ");
+            int choixCarte = sc.nextInt();
 
-        for (int i=1; i<listJoueur.size();i++){}
-        carte.pouvoirCarte(joueur,plateau);
+            if (choixCarte == 1) { // Mutisme
+                listJoueur.get(i).setPuissanceCoup(i);
+                System.out.println(" Carte Mutisme");
+
+            } else if (choixCarte == 2) { //carte Clone
+
+            } else if (choixCarte == 3) { // carte Larcin
+
+            } else if (choixCarte == 4) { //carte Fin de manche
+
+            } else if (choixCarte == 5) { //carte Milieu
+                plateau.setPlaceMur(10);
+
+            } else if (choixCarte == 6) {  //carte Recyclage
+                Scanner sc2 = new Scanner(System.in);
+                System.out.println("P ou M ? ");
+                int choix = sc.nextInt();
+
+            } else if (choixCarte == 7) {//carte Boost
+                listJoueur.get(i).setPuissanceCoup(listJoueur.get(i).getPuissanceCoup() + 7);
+            } else if (choixCarte == 8) { // Double dose
+                listJoueur.get(i).setPuissanceCoup(listJoueur.get(i).getPuissanceCoup() * 2);
+            } else if (choixCarte == 9) { //carte Qui perd gagne
+
+            } else if (choixCarte == 10) { //carte Brasier
+
+            } else if (choixCarte == 11) { // carte Résistance
+
+            } else if (choixCarte == 12) { // Harpagon
+
+            } else if (choixCarte == 13) { // Boost réserve
+                listJoueur.get(i).setPointMana(listJoueur.get(i).getPointMana() + 13);
+            } else if (choixCarte == 14) { //Aspiration
+
+            }
+        }
     }
 
 
 
     public void superPaquet(){
 
-        for (int i = 1; i < cartesJ1.length; i++) {
-            System.out.print(" Cartes joueur 1 [" + i + "]=" + cartesJ1[i] + " ");
-        }
-        for (int i = 1; i < cartesJ2.length; i++) {
-            System.out.print(" Cartes joueur 2 [" + i + "]=" + cartesJ2[i] + " ");
-        }
+//        for (int i = 1; i < cartesJ1.length; i++) {
+//            System.out.print(" Cartes joueur 1 [" + i + "]=" + cartesJ1[i] + " ");
+//        }
+
+//        for (int i = 1; i < cartesJ2.length; i++) {
+//            System.out.print(" Cartes joueur 2 [" + i + "]=" + cartesJ2[i] + " ");
+//        }
 
     }
 
