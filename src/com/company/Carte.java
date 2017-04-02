@@ -1,7 +1,10 @@
 package com.company;
 
+import jdk.nashorn.internal.scripts.JO;
+
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 
 /**
  * Created by Gaby on 24/02/2017.
@@ -50,6 +53,48 @@ public class Carte {
         return ""+numCarte;
     }
 
+    public void pouvoirCarte(Joueur j, Plateau plateau){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Saisissez un entier : ");
+        int choixCarte = sc.nextInt();
+
+        if (choixCarte == 1) { // Mutisme
+
+            j.setPuissanceCoup(0);
+        } else if (choixCarte == 2) { //carte Clone
+
+        } else if (choixCarte == 3) { // carte Larcin
+
+        } else if (choixCarte == 4) { //carte Fin de manche
+
+        } else if (choixCarte == 5) { //carte Milieu
+
+            plateau.setPlaceMur(10);
+
+        } else if (choixCarte == 6) {  //carte Recyclage
+            Scanner sc2 = new Scanner(System.in);
+            System.out.println("P ou M ? ");
+            int choix = sc.nextInt();
+
+        } else if (choixCarte == 7) {//carte Boost
+            j.setPuissanceCoup(j.getPuissanceCoup()+7);
+        } else if (choixCarte == 8) { // Double dose
+            j.setPuissanceCoup(j.getPuissanceCoup()*2);
+        } else if (choixCarte == 9) { //carte Qui perd gagne
+
+        } else if (choixCarte == 10) { //carte Brasier
+
+        } else if (choixCarte == 11) { // carte Résistance
+
+        } else if (choixCarte == 12) { // Harpagon
+
+        } else if (choixCarte == 13) { // Boost réserve
+            j.setPointMana(j.getPointMana()+13);
+        } else if (choixCarte == 14) { //Aspiration
+
+        }
+
+    }
 
 
 

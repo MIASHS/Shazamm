@@ -37,12 +37,13 @@ public class Jeu {
             numJoueur+=1;
         }
         Plateau p= new Plateau();
+
         couleurJoueur();
         init();
-//        superPaquet();
-        melanger(50);
+        superPaquet();
 
         while (listJoueur.size()==2) {
+
             attaquer(p);
         }
 
@@ -60,6 +61,7 @@ public class Jeu {
 
     public void choixPuissance(Plateau plateau){
         System.out.println(" le nombre de cases est de "+plateau.getTailleTab());
+
         for (int i=0; i<listJoueur.size();i++) {
 
             if (listJoueur.get(i).getPointMana()==0){
@@ -94,8 +96,9 @@ public class Jeu {
 
     }
 
-    public void attaquer(Plateau plateau) {
-            this.choixPuissance(plateau);
+    public void attaquer(Plateau plateau,Joueur joueur, Carte carte) {
+        this.choixPuissance(plateau);
+        this.choixCarte(carte,joueur,plateau);
 //        Enumeration enumeration = plateau.plateauBase.elements();
 //        while (enumeration.hasMoreElements()) {
 //            System.out.println("Résultat du debut du tour " + enumeration.nextElement());
@@ -104,33 +107,34 @@ public class Jeu {
             if (listJoueur.get(0).getPuissanceCoup() < listJoueur.get(1).getPuissanceCoup()) {
                 System.out.println("Pas assez fort batard " + listJoueur.get(1).getNumJoueur() + " gagne le tour");
                 plateau.setPlaceMur(plateau.getPlaceMur() - 1);
+                plateau.plateauBase.put("m", plateau.getPlaceMur());
                 if (plateau.getPlaceJ1() == 0) {          // Condition si J1 est à 0
                     System.out.println("Fin du game");
                 } else if (plateau.getPlaceJ1() == plateau.getPlaceMur()) {
                     System.out.println("Bien joué J2");
                     System.out.println("FIN DE LA MANCHE !!!! ");
                     System.out.println(listJoueur.get(1).getNomJoueur() + " gagne la manche");
-
                     System.out.println("Nombre de manches " + nbManches);
                     FinManche(plateau);
                     System.out.println("Taille tab " + plateau.getTailleTab());
                     plateau.plateauBase.put("J1", plateau.getPlaceJ1() - 3);
-                    plateau.plateauBase.put("m", plateau.getPlaceMur());
                     plateau.plateauBase.put("J2", plateau.getPlaceJ2() - 3);
+
+
                 }
 
                 //Attaque du joueur 2 pas assez forte
             } else if (listJoueur.get(0).getPuissanceCoup() > listJoueur.get(1).getPuissanceCoup()) {
                 plateau.setPlaceMur(plateau.getPlaceMur() + 1);
-                if (plateau.getPlaceJ2() == plateau.getPlaceMur()) {
+                plateau.plateauBase.put("m", plateau.getPlaceMur());
+                if (plateau.getPlaceMur() >= plateau.getPlaceJ2()) {
+                    plateau.plateauBase.put("J1", plateau.getPlaceJ1() + 3);
+                    plateau.plateauBase.put("J2", plateau.getPlaceJ2() + 3);
                     System.out.println(" Bien joué J1");
                     System.out.println("FIN DE LA MANCHE !!!! ");
                     System.out.println(listJoueur.get(0).getNomJoueur() + " gagne la manche");
                     FinManche(plateau);
                     System.out.println("Taille tab " + plateau.getTailleTab());
-                    plateau.plateauBase.put("J1", plateau.getPlaceJ1() + 3);
-                    plateau.plateauBase.put("m", plateau.getPlaceMur());
-                    plateau.plateauBase.put("J2", plateau.getPlaceJ2() + 3);
 
                 }
                 if (plateau.getPlaceJ2() == plateau.getTailleTab()) {          // Condition si J2 est au bout du plateau droit
@@ -153,6 +157,7 @@ public class Jeu {
 
 
 
+
 //        for (int i = 1; i < tableauEntier.length; i++) {
 //            System.out.print(" Connard de joueur 1 [" + i + "]=" + tableauEntier[i] + " ");
 //        }
@@ -161,13 +166,24 @@ public class Jeu {
 
 
     public void init() {
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 6; i++) {
             cartesJ1[i] = new Carte(i, "\n");
+            melanger(50);
+
         }
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 6; i++) {
             cartesJ2[i] = new Carte(i, "\n");
+            melanger(50);
+
         }
     }
+
+    public void choixCarte(Carte carte,Joueur joueur,Plateau plateau){
+
+        for (int i=1; i<listJoueur.size();i++){}
+        carte.pouvoirCarte(joueur,plateau);
+    }
+
 
 
     public void superPaquet(){
@@ -227,11 +243,13 @@ public class Jeu {
 //            plateau.plateauBase.put("J1", plateau.getPlaceJ1()+3);
 //            plateau.plateauBase.put("m", plateau.getPlaceMur());
 //            plateau.plateauBase.put("J2", plateau.getPlaceJ2()+3);
-            nbManches+=1;
+//            nbManches+=1;
 //            if (nbManches>1){
 //                plateau.setTabLave(plateau.getTabLave()-2);
 //                System.out.println("LAVE "+plateau.getTabLave());
-//
+//                plateau.plateauBase.put("J1", plateau.getPlaceJ1()+3);
+//            plateau.plateauBase.put("m", plateau.getPlaceMur());
+//            plateau.plateauBase.put("J2", plateau.getPlaceJ2()+3);
 //            }
         // }
     }
