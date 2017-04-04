@@ -126,7 +126,6 @@ public class Jeu {
                     plateau.plateauBase.put("J1", plateau.getPlaceJ1() - 3);
                     plateau.plateauBase.put("J2", plateau.getPlaceJ2() - 3);
 
-
                 }
 
                 //Attaque du joueur 2 pas assez forte
@@ -185,6 +184,7 @@ public class Jeu {
 //    }
 
     public void choixCarte(Plateau plateau){
+
         this.pouvoirCarte(plateau);
     }
 
@@ -306,13 +306,13 @@ public class Jeu {
 //            plateau.plateauBase.put("m", plateau.getPlaceMur());
 //            plateau.plateauBase.put("J2", plateau.getPlaceJ2()+3);
 //            nbManches+=1;
-//            if (nbManches>1){
-//                plateau.setTabLave(plateau.getTabLave()-2);
-//                System.out.println("LAVE "+plateau.getTabLave());
-//                plateau.plateauBase.put("J1", plateau.getPlaceJ1()+3);
-//            plateau.plateauBase.put("m", plateau.getPlaceMur());
-//            plateau.plateauBase.put("J2", plateau.getPlaceJ2()+3);
-//            }
+            if (nbManches>1){
+                plateau.setTabLave(plateau.getTabLave()-2);
+                System.out.println("LAVE "+plateau.getTabLave());
+                plateau.plateauBase.put("J1", plateau.getPlaceJ1()+3);
+            plateau.plateauBase.put("m", plateau.getPlaceMur());
+            plateau.plateauBase.put("J2", plateau.getPlaceJ2()+3);
+            }
         // }
     }
 
