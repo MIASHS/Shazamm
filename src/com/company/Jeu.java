@@ -197,36 +197,49 @@ public class Jeu {
             if (choixCarte == 1) { // Mutisme
                 listJoueur.get(i).setPuissanceCoup(i);
                 System.out.println(" Carte Mutisme");
+                break;
 
             } else if (choixCarte == 2) { //carte Clone
+                break;
 
             } else if (choixCarte == 3) { // carte Larcin
 
+                break;
             } else if (choixCarte == 4) { //carte Fin de manche
 
+                break;
             } else if (choixCarte == 5) { //carte Milieu
                 plateau.setPlaceMur(10);
 
+                break;
             } else if (choixCarte == 6) {  //carte Recyclage
                 Scanner sc2 = new Scanner(System.in);
                 System.out.println("P ou M ? ");
                 int choix = sc.nextInt();
-
+                break;
             } else if (choixCarte == 7) {//carte Boost
                 listJoueur.get(i).setPuissanceCoup(listJoueur.get(i).getPuissanceCoup() + 7);
+                break;
             } else if (choixCarte == 8) { // Double dose
                 listJoueur.get(i).setPuissanceCoup(listJoueur.get(i).getPuissanceCoup() * 2);
+                break;
             } else if (choixCarte == 9) { //carte Qui perd gagne
+                break;
 
             } else if (choixCarte == 10) { //carte Brasier
+                break;
 
             } else if (choixCarte == 11) { // carte Résistance
+                break;
 
             } else if (choixCarte == 12) { // Harpagon
+                break;
 
             } else if (choixCarte == 13) { // Boost réserve
                 listJoueur.get(i).setPointMana(listJoueur.get(i).getPointMana() + 13);
+                break;
             } else if (choixCarte == 14) { //Aspiration
+                break;
 
             }
         }
