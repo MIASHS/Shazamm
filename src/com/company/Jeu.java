@@ -23,7 +23,7 @@ public class Jeu {
     public void debutJeu(){
         this.listCarte=new ArrayList<Carte>();
         this.listJoueur= new ArrayList<Joueur>();
-        int numJoueur=0;
+        int numJoueur=1;
         int pointMana=50;
         String nomJoueur;
         System.out.println("Bienvenue dans le jeu Shazamm !");
@@ -81,7 +81,7 @@ public class Jeu {
                 System.out.println("Nouveau tour");
                 break;
             } else if (puissance > listJoueur.get(i).getPointMana()) {
-                System.out.println("Pas possible FDP recommence");
+                System.out.println("Pas possible recommencez");
                 System.out.println("Points de mana Joueur "+listJoueur.get(i).getPointMana());
                 choixPuissance(plateau);
                 break;
@@ -111,7 +111,7 @@ public class Jeu {
             //Attaque du joueur 1 pas assez forte
 
             if (listJoueur.get(0).getPuissanceCoup() < listJoueur.get(1).getPuissanceCoup()) {
-                System.out.println("Pas assez fort batard " + listJoueur.get(1).getNumJoueur() + " gagne le tour");
+                System.out.println("Pas assez fort J1 le " + listJoueur.get(1).getNumJoueur() + " gagne le tour");
                 plateau.setPlaceMur(plateau.getPlaceMur() - 1);
                 plateau.plateauBase.put("m", plateau.getPlaceMur());
                 if (plateau.getPlaceJ1() == 0) {          // Condition si J1 est à 0
@@ -147,9 +147,9 @@ public class Jeu {
                 }
             } else if (listJoueur.get(0).getPuissanceCoup() == listJoueur.get(1).getPuissanceCoup()) {
 
-                System.out.println(" Même patate pour les deux joueurs");
+                System.out.println(" Même puissance pour les deux joueurs");
             } else {
-                System.out.println("OUALALALA");
+                System.out.println("Problèmes ?!");
             }
 
             Enumeration enumeration2 = plateau.plateauBase.elements();
