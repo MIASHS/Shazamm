@@ -38,10 +38,11 @@ public class Jeu {
             numJoueur+=1;
         }
         Plateau p= new Plateau();
-
+        //initTabCartes();
         couleurJoueur();
         init();
         superPaquet();
+        melanger();
 
         while (listJoueur.size()==2) {
 
@@ -169,14 +170,13 @@ public class Jeu {
 
 
 
-//    public void init() {
+//    public void initTabCartes() {
 //        for (int i = 0; i < 6; i++) {
 //            cartesJ1[i] = new Carte(i, "\n");
 //            melanger(50);
 //
-//        }
-//        for (int i = 0; i < 6; i++) {
-//            cartesJ2[i] = new Carte(i, "\n");
+//        }for (int i = 0; i < 6; i++) {
+//           cartesJ2[i] = new Carte(i, "\n");
 //            melanger(50);
 //
 //        }
@@ -301,20 +301,26 @@ public class Jeu {
 
     }
 
-    public void echangerDeuxCartes(){
-        int z = (int) (Math.random() * 15.0);
-        int y = (int)(Math.random() * 15.0);
-        Carte surprise = cartesJ1[y];
-        cartesJ1[y] = cartesJ1 [z];
-        cartesJ1[z]= surprise;
-        Carte surprise2 =cartesJ2[y];
-        cartesJ2[y] = cartesJ1 [z];
-        cartesJ2[z]= surprise2;
-    }
+//    public void echangerDeuxCartes(){
+//        int z = (int) (Math.random() * 15.0);
+//        int y = (int)(Math.random() * 15.0);
+//        Carte surprise = cartesJ1[y];
+//        cartesJ1[y] = cartesJ1 [z];
+//        cartesJ1[z]= surprise;
+//        Carte surprise2 =cartesJ2[y];
+//        cartesJ2[y] = cartesJ1 [z];
+//        cartesJ2[z]= surprise2;
+//    }
+//
+//    public void melanger(int nbFista) {
+//        for (int i = 0; i < nbFista; i++) {
+//            this.echangerDeuxCartes();
+//        }
+//    }
 
-    public void melanger(int nbFista) {
-        for (int i = 0; i < nbFista; i++) {
-            this.echangerDeuxCartes();
+    public void melanger() {
+        for (int i = 0; i < 50; i++) {
+            Collections.shuffle(listCarte);
         }
     }
 
