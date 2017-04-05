@@ -125,7 +125,6 @@ public class Jeu {
                     System.out.println("Taille tab " + plateau.getTailleTab());
                     plateau.plateauBase.put("J1", plateau.getPlaceJ1() - 3);
                     plateau.plateauBase.put("J2", plateau.getPlaceJ2() - 3);
-
                 }
 
                 //Attaque du joueur 2 pas assez forte
@@ -157,7 +156,7 @@ public class Jeu {
             while (enumeration2.hasMoreElements()) {
                 System.out.println("Résultat de la fin du tour " + enumeration2.nextElement());
             }
-            nbTours += 1;
+
         }
 
 
@@ -195,41 +194,66 @@ public class Jeu {
             int choixCarte = sc.nextInt();
 
             if (choixCarte == 1) { // Mutisme
-                listJoueur.get(i).setPuissanceCoup(i);
+                listJoueur.get(0).setPuissanceCoup(0);
+                listJoueur.get(1).setPuissanceCoup(0);
                 System.out.println(" Carte Mutisme");
+
                 break;
 
             } else if (choixCarte == 2) { //carte Clone
                 break;
 
             } else if (choixCarte == 3) { // carte Larcin
-
                 break;
+
             } else if (choixCarte == 4) { //carte Fin de manche
-
+                this.FinManche(plateau);
                 break;
+
             } else if (choixCarte == 5) { //carte Milieu
                 plateau.setPlaceMur(10);
-
                 break;
+
             } else if (choixCarte == 6) {  //carte Recyclage
                 Scanner sc2 = new Scanner(System.in);
-                System.out.println("P ou M ? ");
+                System.out.println("Vous avez le droit à 5 points en dessous ou au dessus de votre mise ? ");
                 int choix = sc.nextInt();
+                if ((choix>5)||(choix<0)){
+                    System.out.println(" Impossible");
+                }else {
+                    listJoueur.get(i).setPuissanceCoup(choix);
+                }
                 break;
+
             } else if (choixCarte == 7) {//carte Boost
                 listJoueur.get(i).setPuissanceCoup(listJoueur.get(i).getPuissanceCoup() + 7);
                 break;
             } else if (choixCarte == 8) { // Double dose
                 listJoueur.get(i).setPuissanceCoup(listJoueur.get(i).getPuissanceCoup() * 2);
                 break;
+
             } else if (choixCarte == 9) { //carte Qui perd gagne
+                if (listJoueur.get(i)==listJoueur.get(0)){
+                    plateau.setPlaceMur(plateau.getPlaceMur() -2);
+                }else if (listJoueur.get(i)==listJoueur.get(1)){
+                    plateau.setPlaceMur(plateau.getPlaceMur() +2);
+                }
                 break;
 
             } else if (choixCarte == 10) { //carte Brasier
+                if (listJoueur.get(i)==listJoueur.get(0)){
+                    plateau.setPlaceMur(plateau.getPlaceMur() + 2);
+                }else if (listJoueur.get(i)==listJoueur.get(1)){
+                    plateau.setPlaceMur(plateau.getPlaceMur() - 2);
+                }
                 break;
 
             } else if (choixCarte == 11) { // carte Résistance
+                if (listJoueur.get(i)==listJoueur.get(0)){
+                    plateau.setPlaceMur(plateau.getPlaceMur() -1);
+                }else if (listJoueur.get(i)==listJoueur.get(1)){
+                    plateau.setPlaceMur(plateau.getPlaceMur() +1);
+                }
                 break;
 
             } else if (choixCarte == 12) { // Harpagon
@@ -238,8 +262,14 @@ public class Jeu {
             } else if (choixCarte == 13) { // Boost réserve
                 listJoueur.get(i).setPointMana(listJoueur.get(i).getPointMana() + 13);
                 break;
+
             } else if (choixCarte == 14) { //Aspiration
-                break;
+                if (listJoueur.get(i)==listJoueur.get(0)){
+                    listJoueur.get(0).setPointMana(listJoueur.get(1).getPuissanceCoup());
+                }else if (listJoueur.get(i)==listJoueur.get(1)){
+                    listJoueur.get(1).setPointMana(listJoueur.get(0).getPuissanceCoup());
+                }
+                    break;
 
             }
         }
@@ -306,7 +336,7 @@ public class Jeu {
 //            plateau.plateauBase.put("m", plateau.getPlaceMur());
 //            plateau.plateauBase.put("J2", plateau.getPlaceJ2()+3);
 //            nbManches+=1;
-            if (nbManches>1){
+            if (nbManches<=1){
                 plateau.setTabLave(plateau.getTabLave()-2);
                 System.out.println("LAVE "+plateau.getTabLave());
                 plateau.plateauBase.put("J1", plateau.getPlaceJ1()+3);
