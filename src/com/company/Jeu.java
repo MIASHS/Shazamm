@@ -194,10 +194,9 @@ public class Jeu {
             int choixCarte = sc.nextInt();
 
             if (choixCarte == 1) { // Mutisme
+                System.out.println(" Carte Mutisme");
                 listJoueur.get(0).setPuissanceCoup(0);
                 listJoueur.get(1).setPuissanceCoup(0);
-                System.out.println(" Carte Mutisme");
-
                 break;
 
             } else if (choixCarte == 2) { //carte Clone
@@ -207,17 +206,22 @@ public class Jeu {
                 break;
 
             } else if (choixCarte == 4) { //carte Fin de manche
+                System.out.println("Carte carte Fin de manche");
                 this.FinManche(plateau);
                 break;
 
             } else if (choixCarte == 5) { //carte Milieu
+                System.out.println("Carte carte Milieu");
+
                 plateau.setPlaceMur(10);
                 break;
 
             } else if (choixCarte == 6) {  //carte Recyclage
+                System.out.println("Carte carte Recyclage");
+
                 Scanner sc2 = new Scanner(System.in);
                 System.out.println("Vous avez le droit à 5 points en dessous ou au dessus de votre mise ? ");
-                int choix = sc.nextInt();
+                int choix = sc2.nextInt();
                 if ((choix>5)||(choix<0)){
                     System.out.println(" Impossible");
                 }else {
@@ -226,13 +230,18 @@ public class Jeu {
                 break;
 
             } else if (choixCarte == 7) {//carte Boost
+                System.out.println("Carte carte Boost");
+
                 listJoueur.get(i).setPuissanceCoup(listJoueur.get(i).getPuissanceCoup() + 7);
                 break;
             } else if (choixCarte == 8) { // Double dose
+                System.out.println("Carte carte Double dose");
+
                 listJoueur.get(i).setPuissanceCoup(listJoueur.get(i).getPuissanceCoup() * 2);
                 break;
 
             } else if (choixCarte == 9) { //carte Qui perd gagne
+                System.out.println("Carte carte Qui perd gagne");
                 if (listJoueur.get(i)==listJoueur.get(0)){
                     plateau.setPlaceMur(plateau.getPlaceMur() -2);
                 }else if (listJoueur.get(i)==listJoueur.get(1)){
@@ -241,6 +250,7 @@ public class Jeu {
                 break;
 
             } else if (choixCarte == 10) { //carte Brasier
+                System.out.println("Carte Brasier");
                 if (listJoueur.get(i)==listJoueur.get(0)){
                     plateau.setPlaceMur(plateau.getPlaceMur() + 2);
                 }else if (listJoueur.get(i)==listJoueur.get(1)){
@@ -249,6 +259,7 @@ public class Jeu {
                 break;
 
             } else if (choixCarte == 11) { // carte Résistance
+                System.out.println("Carte Resistance");
                 if (listJoueur.get(i)==listJoueur.get(0)){
                     plateau.setPlaceMur(plateau.getPlaceMur() -1);
                 }else if (listJoueur.get(i)==listJoueur.get(1)){
@@ -260,17 +271,18 @@ public class Jeu {
                 break;
 
             } else if (choixCarte == 13) { // Boost réserve
+                System.out.println("Carte Boost réserve");
                 listJoueur.get(i).setPointMana(listJoueur.get(i).getPointMana() + 13);
                 break;
 
             } else if (choixCarte == 14) { //Aspiration
+                System.out.println("Carte Aspiration");
                 if (listJoueur.get(i)==listJoueur.get(0)){
                     listJoueur.get(0).setPointMana(listJoueur.get(1).getPuissanceCoup());
                 }else if (listJoueur.get(i)==listJoueur.get(1)){
                     listJoueur.get(1).setPointMana(listJoueur.get(0).getPuissanceCoup());
                 }
                     break;
-
             }
         }
     }
