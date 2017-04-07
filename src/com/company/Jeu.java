@@ -44,7 +44,7 @@ public class Jeu {
         superPaquet();
         melanger();
 
-        while (listJoueur.size()==2) {
+        while (p.getPlaceJ2()<p.getTailleTab()&&(p.getPlaceJ1()>0)) {
 
             attaquer(p);
         }
@@ -91,7 +91,7 @@ public class Jeu {
                 listJoueur.get(i).setPuissanceCoup(puissance);
                 listJoueur.get(i).setPointMana(listJoueur.get(i).getPointMana() - puissance);
                 System.out.println(" Puissance du coup " + puissance);
-                this.choixCarte(plateau);
+              //  this.choixCarte(plateau);
                 System.out.println(" la puissance du coup est "+listJoueur.get(i).getPuissanceCoup());
                 System.out.println("il reste " + listJoueur.get(i).getPointMana() + " points de Mana");
                 System.out.println("");
@@ -104,61 +104,63 @@ public class Jeu {
     }
 
     public void attaquer(Plateau plateau) {
-        this.choixPuissance(plateau);
+
 //        Enumeration enumeration = plateau.plateauBase.elements();
 //        while (enumeration.hasMoreElements()) {
 //            System.out.println("Résultat du debut du tour " + enumeration.nextElement());
 //        }
-            //Attaque du joueur 1 pas assez forte
-
+        //Attaque du joueur 1 pas assez forte
+       // while () {
+            this.choixPuissance(plateau);
             if (listJoueur.get(0).getPuissanceCoup() < listJoueur.get(1).getPuissanceCoup()) {
                 System.out.println("Pas assez fort J1 le " + listJoueur.get(1).getNumJoueur() + " gagne le tour");
                 plateau.setPlaceMur(plateau.getPlaceMur() - 1);
                 plateau.plateauBase.put("m", plateau.getPlaceMur());
-                if (plateau.getPlaceJ1() == 0) {          // Condition si J1 est à 0
-                    System.out.println("Fin du game");
-                } else if (plateau.getPlaceJ1() == plateau.getPlaceMur()) {
+
+                if (plateau.getPlaceJ1() >= plateau.getPlaceMur()) {
                     System.out.println("Bien joué J2");
                     System.out.println("FIN DE LA MANCHE !!!! ");
                     System.out.println(listJoueur.get(1).getNomJoueur() + " gagne la manche");
                     System.out.println("Nombre de manches " + nbManches);
-                    FinManche(plateau);
                     System.out.println("Taille tab " + plateau.getTailleTab());
-                    plateau.plateauBase.put("J1", plateau.getPlaceJ1() - 3);
-                    plateau.plateauBase.put("J2", plateau.getPlaceJ2() - 3);
+                    FinManche(plateau);
+                    nbManches+=1;
                 }
 
-                //Attaque du joueur 2 pas assez forte
+                if (plateau.getPlaceJ1() == 0) {          // Condition si J1 est à 0
+                    System.out.println("Fin du game");
+                    //Attaque du joueur 2 pas assez forte
+                }
+
             } else if (listJoueur.get(0).getPuissanceCoup() > listJoueur.get(1).getPuissanceCoup()) {
                 plateau.setPlaceMur(plateau.getPlaceMur() + 1);
                 plateau.plateauBase.put("m", plateau.getPlaceMur());
                 if (plateau.getPlaceMur() >= plateau.getPlaceJ2()) {
-                    plateau.plateauBase.put("J1", plateau.getPlaceJ1() + 3);
-                    plateau.plateauBase.put("J2", plateau.getPlaceJ2() + 3);
                     System.out.println(" Bien joué J1");
                     System.out.println("FIN DE LA MANCHE !!!! ");
                     System.out.println(listJoueur.get(0).getNomJoueur() + " gagne la manche");
-                    FinManche(plateau);
                     System.out.println("Taille tab " + plateau.getTailleTab());
-
+                    FinManche(plateau);
+                    nbManches+=1;
                 }
                 if (plateau.getPlaceJ2() == plateau.getTailleTab()) {          // Condition si J2 est au bout du plateau droit
                     System.out.println("Fin du game");
 
                 }
-            } else if (listJoueur.get(0).getPuissanceCoup() == listJoueur.get(1).getPuissanceCoup()) {
+
+            } else { //if (listJoueur.get(0).getPuissanceCoup() == listJoueur.get(1).getPuissanceCoup())
 
                 System.out.println(" Même puissance pour les deux joueurs");
-            } else {
-                System.out.println("Problèmes ?!");
             }
-
             Enumeration enumeration2 = plateau.plateauBase.elements();
             while (enumeration2.hasMoreElements()) {
                 System.out.println("Résultat de la fin du tour " + enumeration2.nextElement());
-            }
 
+            }
         }
+   // }
+
+
 
 
 
@@ -345,24 +347,30 @@ public class Jeu {
 
 
     public void FinManche(Plateau plateau){
-  //      for (int i=0; i<listJoueur.size();i++){
             listJoueur.get(0).setPointMana(50);
             System.out.println("Joueur "+listJoueur.get(0).getNomJoueur()+" a "+listJoueur.get(0).getPointMana()+" points de mana");
             listJoueur.get(1).setPointMana(50);
             System.out.println("Joueur "+listJoueur.get(1).getNomJoueur()+" a "+listJoueur.get(1).getPointMana()+" points de mana");
+        int a=((plateau.getTailleTab()+1)/2)-plateau.getPlaceMur();
+        System.out.println("a:   "+a);
+        if (nbManches>1) {
+            plateau.setTailleTab(plateau.getTailleTab() - 2);
+            System.out.println("avant :     " + plateau.getPlaceMur());
+            plateau.setPlaceMur((plateau.getTailleTab() / 2 + 1) - a);
+            System.out.println("apres :     " + plateau.getPlaceMur());
+            plateau.setPlaceJ1(plateau.getPlaceMur() - 3);
+            plateau.setPlaceJ2(plateau.getPlaceMur() + 3);
+            plateau.plateauBase.put("J1", plateau.getPlaceJ1());
+            plateau.plateauBase.put("m", plateau.getPlaceMur());
+            plateau.plateauBase.put("J2", plateau.getPlaceJ2());
 //            plateau.plateauBase.put("J1", plateau.getPlaceJ1()+3);
 //            plateau.plateauBase.put("m", plateau.getPlaceMur());
 //            plateau.plateauBase.put("J2", plateau.getPlaceJ2()+3);
 //            nbManches+=1;
-            if (nbManches<=1){
-                plateau.setTabLave(plateau.getTabLave()-2);
-                System.out.println("LAVE "+plateau.getTabLave());
-                plateau.plateauBase.put("J1", plateau.getPlaceJ1()+3);
-            plateau.plateauBase.put("m", plateau.getPlaceMur());
-            plateau.plateauBase.put("J2", plateau.getPlaceJ2()+3);
-            }
-        // }
+        }
+
+         }
     }
 
 
-}
+
